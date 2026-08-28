@@ -34,6 +34,7 @@
         "https://bard.google.com/*"
       ],
       "js": [
+        "src/defaults.js",
         "src/gibberish.js",
         "src/sites/chatgpt.js",
         "src/sites/claude.js",

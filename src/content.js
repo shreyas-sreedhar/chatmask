@@ -6,12 +6,18 @@
   const STYLE_ID = "chatmask-style";
 
   let enabled = false;
+  let providers = { ...(globalThis.Chatmask.DEFAULTS.providers || {}) };
   let observer = null;
   let applyTimer = 0;
 
   function getAdapter() {
     const host = location.hostname;
     return (globalThis.Chatmask.sites || []).find((site) => site.match(host)) || null;
+  }
+
+  function shouldCover() {
+    const adapter = getAdapter();
+    return Boolean(enabled && adapter && providers[adapter.id]);
   }
 
   function sanitizeAria(original) {
@@ -99,21 +105,21 @@
     });
   }
 
-  function ensureStyle(adapter) {
+  function ensureStyle(adapter, cover) {
     let style = document.getElementById(STYLE_ID);
     if (!style) {
       style = document.createElement("style");
       style.id = STYLE_ID;
       (document.head || document.documentElement).appendChild(style);
     }
-    style.textContent = enabled ? adapter.coverCss || "" : "";
+    style.textContent = cover ? adapter.coverCss || "" : "";
   }
 
   function scheduleApply() {
     if (applyTimer) return;
     applyTimer = globalThis.requestAnimationFrame(() => {
       applyTimer = 0;
-      if (enabled) applyCover();
+      if (shouldCover()) applyCover();
     });
   }
 
@@ -133,13 +139,13 @@
     observer = null;
   }
 
-  function setEnabled(next) {
-    enabled = Boolean(next);
+  function applyState() {
     const adapter = getAdapter();
-    document.documentElement.classList.toggle("chatmask-enabled", enabled);
-    if (adapter) ensureStyle(adapter);
+    const cover = shouldCover();
+    document.documentElement.classList.toggle("chatmask-enabled", cover);
+    if (adapter) ensureStyle(adapter, cover);
 
-    if (enabled) {
+    if (cover) {
       applyCover();
       startObserver();
       return;
@@ -149,12 +155,18 @@
     restoreAll();
   }
 
-  chrome.storage.local.get({ enabled: false }, ({ enabled: stored }) => {
-    setEnabled(stored);
-  });
+  function readState(stored) {
+    const defaults = globalThis.Chatmask.DEFAULTS;
+    enabled = Boolean(stored.enabled);
+    providers = { ...defaults.providers, ...(stored.providers || {}) };
+    applyState();
+  }
+
+  chrome.storage.local.get(globalThis.Chatmask.DEFAULTS, readState);
 
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "local" || !changes.enabled) return;
-    setEnabled(changes.enabled.newValue);
+    if (area !== "local") return;
+    if (!changes.enabled && !changes.providers) return;
+    chrome.storage.local.get(globalThis.Chatmask.DEFAULTS, readState);
   });
 })();

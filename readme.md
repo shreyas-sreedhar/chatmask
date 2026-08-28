@@ -1,6 +1,8 @@
 # Chatmask
 
-Chrome extension that replaces ChatGPT, Claude, Grok, and Gemini sidebar chat names with gibberish when you press **Activate**. The toggle stays on across reloads and tabs until you press **Deactivate**.
+Chrome extension that replaces ChatGPT, Claude, Grok, and Gemini sidebar chat names with gibberish when you press **MaskmyChats**. The toggle stays on across reloads and tabs until you press **Remove Mask**.
+
+Use the provider checkboxes to choose which sites are masked. All four are on by default.
 
 ## Install (unpacked)
 
@@ -13,7 +15,7 @@ Chrome extension that replaces ChatGPT, Claude, Grok, and Gemini sidebar chat na
 ## Use
 
 1. Open [chatgpt.com](https://chatgpt.com), [claude.ai](https://claude.ai), [grok.com](https://grok.com), or [gemini.google.com](https://gemini.google.com) with the sidebar open
-2. Click the Chatmask icon → **Activate**
+2. Click the Chatmask icon → **MaskmyChats**
 3. Recents titles become gibberish; rows stay clickable
-4. Refresh or open another tab — coverage stays on
-5. Click **Deactivate** to restore the real titles
+4. Uncheck a provider to skip masking on that site
+5. Click **Remove Mask** to restore the real titles

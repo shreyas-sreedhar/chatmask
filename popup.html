@@ -10,24 +10,54 @@
 
 <body>
   <header>
-    <img src="icons/icon48.png" alt="" width="28" height="28" />
-    <div>
+    <img src="icons/icon48.png" alt="" width="32" height="32" />
+    <div class="brand">
       <h1>Chatmask</h1>
-      <p>Hide sidebar chat names</p>
+      <p>Mask chat names in AI apps.</p>
     </div>
   </header>
 
-  <div class="status" data-on="false">
-    <span class="dot"></span>
-    <span class="label">Inactive</span>
-  </div>
+  <button id="toggle" type="button" role="switch" aria-checked="false">
+    <span class="status" data-on="false">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="label">Inactive</span>
+    </span>
+    <span class="track" aria-hidden="true">
+      <span class="knob"></span>
+    </span>
+  </button>
 
-  <button id="toggle" type="button" aria-pressed="false">Activate</button>
+  <fieldset class="providers">
+    <legend>Apps</legend>
+    <label>
+      <input type="checkbox" name="provider" value="chatgpt" checked />
+      ChatGPT
+    </label>
+    <label>
+      <input type="checkbox" name="provider" value="claude" checked />
+      Claude
+    </label>
+    <label>
+      <input type="checkbox" name="provider" value="grok" checked />
+      Grok
+    </label>
+    <label>
+      <input type="checkbox" name="provider" value="gemini" checked />
+      Gemini
+    </label>
+  </fieldset>
 
   <p class="hint">
-    Masks ChatGPT, Claude, Grok, and Gemini sidebar chat names. Completely local — nothing is sent to any server.
+    Only selected apps are masked.<br />
+    Your data stays on your device. ·
+    <a class="github" href="https://github.com/shreyas-sreedhar/chatmask" target="_blank"
+      rel="noopener noreferrer">Github<svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true">
+        <path fill="currentColor"
+          d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 8.28 8.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l4.75-4.75-1.543-1.543A.25.25 0 0 1 10.604 1Z" />
+      </svg></a>
   </p>
 
+  <script src="src/defaults.js"></script>
   <script src="popup.js"></script>
 </body>
 
