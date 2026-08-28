@@ -56,7 +56,18 @@ After you reload the extension, refresh any open chat tab once so the new script
 
 ## Privacy
 
+Full policy: [PRIVACY.md](PRIVACY.md)
+
 Chatmask does not collect, transmit, or sell data.
+
+| | |
+| --- | --- |
+| Network | None. No analytics, accounts, or remote config. |
+| Permissions | `storage` only — remembers the toggle and which apps you selected. |
+| Chat content | Never read for anything except the **sidebar title** of Recents rows. Message bodies are not touched. |
+| Servers | There are none. |
+
+If you fork or redistribute this project, keep it that way.
 
 | | |
 | --- | --- |
