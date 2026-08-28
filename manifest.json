@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Chatmask",
+  "version": "1.0.0",
+  "description": "Hide ChatGPT and Claude sidebar chat names behind gibberish.",
+  "permissions": ["storage"],
+  "action": {
+    "default_title": "Chatmask",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://*.chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://*.claude.ai/*"
+      ],
+      "js": [
+        "src/gibberish.js",
+        "src/sites/chatgpt.js",
+        "src/sites/claude.js",
+        "src/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

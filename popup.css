@@ -1,0 +1,101 @@
+:root {
+  color-scheme: dark;
+  --bg: #12161c;
+  --panel: #1a2028;
+  --text: #e8edf2;
+  --muted: #8b97a5;
+  --line: #2a3340;
+  --on: #6fbf8a;
+  --off: #8b97a5;
+  --btn: #e8edf2;
+  --btn-text: #12161c;
+  --btn-off: #2a3340;
+  --btn-off-text: #e8edf2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 280px;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+header img {
+  border-radius: 7px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+header p {
+  margin: 1px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--off);
+}
+
+.status[data-on="true"] .dot {
+  background: var(--on);
+}
+
+.label {
+  font-weight: 550;
+}
+
+#toggle {
+  width: 100%;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--btn);
+  color: var(--btn-text);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+#toggle[aria-pressed="true"] {
+  background: var(--btn-off);
+  color: var(--btn-off-text);
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
