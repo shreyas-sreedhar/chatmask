@@ -1,8 +1,6 @@
 # Chatmask
 
-Chrome extension that replaces ChatGPT sidebar chat names with gibberish when you press **Activate**. The toggle stays on across reloads and tabs until you press **Deactivate**.
-
-Claude is stubbed and will cover titles after its sidebar selectors are added.
+Chrome extension that replaces ChatGPT and Claude sidebar chat names with gibberish when you press **Activate**. The toggle stays on across reloads and tabs until you press **Deactivate**.
 
 ## Install (unpacked)
 
@@ -14,8 +12,8 @@ Claude is stubbed and will cover titles after its sidebar selectors are added.
 
 ## Use
 
-1. Open [chatgpt.com](https://chatgpt.com) with the sidebar open
+1. Open [chatgpt.com](https://chatgpt.com) or [claude.ai](https://claude.ai) with the sidebar open
 2. Click the Chatmask icon → **Activate**
 3. Recents titles become gibberish; rows stay clickable
-4. Refresh or open another ChatGPT tab — coverage stays on
+4. Refresh or open another tab — coverage stays on
 5. Click **Deactivate** to restore the real titles

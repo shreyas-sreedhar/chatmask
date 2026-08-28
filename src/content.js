@@ -17,6 +17,7 @@
   function sanitizeAria(original) {
     if (/^pin\b/i.test(original)) return "Pin";
     if (/conversation options/i.test(original)) return "Open conversation options";
+    if (/^more options/i.test(original)) return "More options";
     if (original) return "Chat";
     return "";
   }
