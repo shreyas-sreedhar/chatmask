@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Hide ChatGPT, Claude, Grok, and Gemini sidebar chat names behind gibberish.",
   "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_title": "Chatmask",
     "default_popup": "popup.html",

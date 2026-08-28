@@ -27,6 +27,14 @@ async function loadState() {
   };
 }
 
+async function persistAndSync(patch) {
+  await chrome.storage.local.set(patch);
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (tab?.id == null) return;
+  const sent = chrome.tabs.sendMessage(tab.id, { type: "chatmask:sync" });
+  if (sent && typeof sent.catch === "function") sent.catch(() => {});
+}
+
 chrome.storage.local.get(defaults, (stored) => {
   render(Boolean(stored.enabled), mergeProviders(stored.providers));
 });
@@ -34,7 +42,7 @@ chrome.storage.local.get(defaults, (stored) => {
 toggle.addEventListener("click", async () => {
   const state = await loadState();
   const enabled = !state.enabled;
-  await chrome.storage.local.set({ enabled });
+  await persistAndSync({ enabled });
   render(enabled, state.providers);
 });
 
@@ -44,7 +52,7 @@ providerInputs.forEach((input) => {
     providerInputs.forEach((el) => {
       providers[el.value] = el.checked;
     });
-    await chrome.storage.local.set({ providers });
+    await persistAndSync({ providers });
   });
 });
 

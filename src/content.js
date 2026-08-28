@@ -162,11 +162,19 @@
     applyState();
   }
 
+  function pullState() {
+    chrome.storage.local.get(globalThis.Chatmask.DEFAULTS, readState);
+  }
+
   chrome.storage.local.get(globalThis.Chatmask.DEFAULTS, readState);
 
-  chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "local") return;
+  chrome.storage.local.onChanged.addListener((changes) => {
     if (!changes.enabled && !changes.providers) return;
-    chrome.storage.local.get(globalThis.Chatmask.DEFAULTS, readState);
+    pullState();
+  });
+
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message?.type !== "chatmask:sync") return;
+    pullState();
   });
 })();
